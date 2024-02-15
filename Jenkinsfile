@@ -40,7 +40,7 @@ stage('FTP Upload') {
     steps {
         script {
             // Send build artifacts over FTP
-            ftpPublisher(
+            publishOverFTP(
                 continueOnError: true,
                 failOnError: true,
                 alwaysPublishFromMaster: false,
