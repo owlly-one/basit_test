@@ -30,8 +30,36 @@ pipeline {
             steps {
                 echo "Deploying..."
                 script {
-                    // Start the application
-                    sh 'npm start'
+                    // Start the application (if needed)
+                    sh 'npm build'
+                }
+            }
+        }
+
+        stage('FTP Upload') {
+            steps {
+                script {
+                    // Send build artifacts over FTP
+                    ftpPublisher(
+                        continueOnError: true,
+                        failOnError: true,
+                        alwaysPublishFromMaster: false,
+                        masterNodeName: '',
+                        publishers: [
+                            // Configure FTP server details
+                            [
+                                $class: 'FTPItem',
+                                configName: 'ftpserver',
+                                transfers: [
+                                    [
+                                        $class: 'FTPTransfer',
+                                        sourceFiles: 'build/**',
+                                        remoteDirectory: '/'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    )
                 }
             }
         }
