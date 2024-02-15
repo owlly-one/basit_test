@@ -27,7 +27,6 @@ pipeline {
         echo "Uploading artifacts to FTP server..."
         script {
           // Send build artifacts over FTP with error handling
-          try {
             ftpPublisher(
                 server: 'ftpserver', // Name of the configured server
                 transfers: [
@@ -37,10 +36,7 @@ pipeline {
                         removePrefix: 'build'
   ]
 )
-          } catch (error) {
-            echo "Error uploading artifacts: ${error.message}"
-            // Handle the error here, e.g., send notification, retry upload
-          }
+          
         }
       }
     }
