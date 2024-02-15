@@ -40,16 +40,16 @@ stage('FTP Upload') {
     steps {
         script {
             // Send build artifacts over FTP
-            publishOverFTP(
+            ftpPublisher(
                 continueOnError: true,
                 failOnError: true,
                 alwaysPublishFromMaster: false,
                 masterNodeName: '',
                 publishers: [
-                    [$class: 'BapFtpPromotionPublisherPlugin', 
+                    [$class: 'BapFtpParamPublish', 
                      configName: 'ftpserver',
                      transfers: [
-                         [$class: 'BapFtpPromotionPublisherPlugin', 
+                         [$class: 'BapFtpParamPublish', 
                           remoteDirectory: '/',
                           sourceFiles: 'build/**',
                           removePrefix: 'build']
