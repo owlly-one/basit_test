@@ -32,8 +32,9 @@ pipeline {
                 server: 'ftpserver', // Name of the configured server
                 transfers: [
                  // Include files or directories with Ant-style patterns
-                    (source: 'build/**', destination: '/'),
-                    // (source: 'reports/*.html', destination: 'reports/')
+                        remoteDirectory: '/',
+                        sourceFiles: 'build/**',
+                        removePrefix: 'build'
   ]
 )
           } catch (error) {
