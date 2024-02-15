@@ -29,22 +29,13 @@ pipeline {
           // Send build artifacts over FTP with error handling
           try {
             ftpPublisher(
-              continueOnError: false, // Stop on errors
-              failOnError: true,
-              alwaysPublishFromMaster: false,
-              masterNodeName: '',
-              publishers: [
-                [$class: 'BapFtpParamPublish',
-                  configName: 'ftpserver', // Replace with your FTP server config name
-                  transfers: [
-                    [$class: 'BapFtpParamPublish',
-                      remoteDirectory: '/', // Customize remote directory if needed
-                      sourceFiles: 'build/**', // Customize source files pattern
-                      removePrefix: 'build']
-                  ]
-                ]
-              ]
-            )
+                server: 'ftpserver', // Name of the configured server
+                transfers: [
+                 // Include files or directories with Ant-style patterns
+                    (source: 'build/**', destination: '/'),
+                    // (source: 'reports/*.html', destination: 'reports/')
+  ]
+)
           } catch (error) {
             echo "Error uploading artifacts: ${error.message}"
             // Handle the error here, e.g., send notification, retry upload
