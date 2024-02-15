@@ -37,26 +37,28 @@ pipeline {
         }
 
         stage('FTP Upload') {
-            steps {
-                script {
-                    // Send build artifacts over FTP
-                    ftpPublisher(
-                        alwaysPublishFromMaster: false,
-                        continueOnError: true,
-                        failOnError: true,
-                        publishers: [
-                            [$class: 'FTPItem',
-                             configName: 'ftpserver',
-                             transfers: [
-                                [$class: 'FTPTransfer',
-                                 sourceFiles: 'build/**',
-                                 remoteDirectory: '/']
-                             ]
-                                ]
-                        ]
-                    )
-                }
-            }
+    steps {
+        script {
+            // Send build artifacts over FTP
+            ftpPublisher(
+                continueOnError: true,
+                failOnError: true,
+                alwaysPublishFromMaster: false,
+                masterNodeName: '',
+                publishers: [
+                    [$class: 'jenkins.plugins.publish_over_ftp.BapFtpPublisherPlugin', 
+                     pluginInfo: [
+                         configurationName: 'ftpserver',
+                         transfers: [
+                             [$class: 'jenkins.plugins.publish_over_ftp.Transfer', 
+                              remoteDirectory: '/',
+                              sourceFiles: 'build/**',
+                              removePrefix: 'build']
+                         ]
+                     ]
+                    ]
+                ]
+            )
         }
     }
 }
