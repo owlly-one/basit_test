@@ -52,10 +52,11 @@ pipeline {
                                  sourceFiles: 'build/**',
                                  remoteDirectory: '/']
                              ]
-                            ]
+                                ]
                         ]
                     )
                 }
             }
         }
     }
+}
