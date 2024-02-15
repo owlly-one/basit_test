@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage('FTP Upload') {
+stage('FTP Upload') {
     steps {
         script {
             // Send build artifacts over FTP
@@ -47,14 +47,12 @@ pipeline {
                 masterNodeName: '',
                 publishers: [
                     [$class: 'jenkins.plugins.publish_over_ftp.BapFtpPublisherPlugin', 
-                     pluginInfo: [
-                         configurationName: 'ftpserver',
-                         transfers: [
-                             [$class: 'jenkins.plugins.publish_over_ftp.Transfer', 
-                              remoteDirectory: '/',
-                              sourceFiles: 'build/**',
-                              removePrefix: 'build']
-                         ]
+                     configName: 'ftpserver',
+                     transfers: [
+                         [$class: 'jenkins.plugins.publish_over_ftp.Transfer', 
+                          remoteDirectory: '/',
+                          sourceFiles: 'build/**',
+                          removePrefix: 'build']
                      ]
                     ]
                 ]
