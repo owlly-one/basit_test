@@ -46,10 +46,10 @@ stage('FTP Upload') {
                 alwaysPublishFromMaster: false,
                 masterNodeName: '',
                 publishers: [
-                    [$class: 'jenkins.plugins.publish_over_ftp.BapFtpPublisherPlugin', 
+                    [$class: 'jenkins.plugins.publish_over_ftp.FTPPublisherPlugin', 
                      configName: 'ftpserver',
                      transfers: [
-                         [$class: 'jenkins.plugins.publish_over_ftp.Transfer', 
+                         [$class: 'jenkins.plugins.publish_over_ftp.FTPTransfer', 
                           remoteDirectory: '/',
                           sourceFiles: 'build/**',
                           removePrefix: 'build']
