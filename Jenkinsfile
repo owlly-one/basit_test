@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-         stage('FTP Upload') {
+          stage('FTP Upload') {
             steps {
                 script {
                     // Send build artifacts over FTP
@@ -49,7 +49,7 @@ pipeline {
                             // Configure FTP server details
                             [
                                 $class: 'FTPItem',
-                                configName: ftpserver',
+                                configName: 'ftpserver',
                                 transfers: [
                                     [
                                         $class: 'FTPTransfer',
