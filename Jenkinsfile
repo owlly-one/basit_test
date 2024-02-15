@@ -31,7 +31,7 @@ pipeline {
                 echo "Deploying..."
                 script {
                     // Start the application (if needed)
-                    sh 'npm build'
+                    sh 'npm run build'
                 }
             }
         }
