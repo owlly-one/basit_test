@@ -7,8 +7,8 @@ pipeline {
                 echo "Building stages..."
                 script {
                     // Use 'nvm' to manage Node.js versions
-                    // def nodejsInstallation = tool name: 'NodeJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-                    // env.PATH = "${nodejsInstallation}/bin:${env.PATH}"
+                    def nodejsInstallation = tool name: 'NodeJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+                    env.PATH = "${nodejsInstallation}/bin:${env.PATH}"
 
                     // Install dependencies and build
                     sh 'npm install'
