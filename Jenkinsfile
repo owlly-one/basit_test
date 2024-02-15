@@ -36,27 +36,22 @@ pipeline {
             }
         }
 
-          stage('FTP Upload') {
+        stage('FTP Upload') {
             steps {
                 script {
                     // Send build artifacts over FTP
                     ftpPublisher(
+                        alwaysPublishFromMaster: false,
                         continueOnError: true,
                         failOnError: true,
-                        alwaysPublishFromMaster: false,
-                        masterNodeName: '',
                         publishers: [
-                            // Configure FTP server details
-                            [
-                                $class: 'FTPItem',
-                                configName: 'ftpserver',
-                                transfers: [
-                                    [
-                                        $class: 'FTPTransfer',
-                                        sourceFiles: 'build/**',
-                                        remoteDirectory: '/'
-                                    ]
-                                ]
+                            [$class: 'FTPItem',
+                             configName: 'ftpserver',
+                             transfers: [
+                                [$class: 'FTPTransfer',
+                                 sourceFiles: 'build/**',
+                                 remoteDirectory: '/']
+                             ]
                             ]
                         ]
                     )
@@ -64,4 +59,3 @@ pipeline {
             }
         }
     }
-}
