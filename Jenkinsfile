@@ -31,7 +31,7 @@ stage('FTP Upload') {
                 failOnError: true,
                 masterNodeName: '',
                 publishers: [
-                    [ // Add this set of square brackets
+                    [ 
                         configName: 'ftpserver', 
                         transfers: [
                             [
@@ -48,7 +48,7 @@ stage('FTP Upload') {
                                 sourceFiles: 'build/**'
                             ]
                         ]
-                    ] // Add this set of square brackets
+                    ] 
                 ]
             )
         }
