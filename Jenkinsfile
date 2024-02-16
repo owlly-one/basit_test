@@ -24,20 +24,26 @@ pipeline {
 
     stage('FTP Upload') {
       steps {
-        echo "Uploading artifacts to FTP server..."
-        script {
-          // Send build artifacts over FTP with error handling
-            ftpPublisher(
-                server: 'ftpserver', // Name of the configured server
-                transfers: [
-                 // Include files or directories with Ant-style patterns
-                        remoteDirectory: '/',
-                        sourceFiles: 'build/**',
-                        removePrefix: 'build'
-  ]
-)
-          
-        }
+            ftpPublisher alwaysPublishFromMaster: false
+            continueOnError: false,
+            failOnError: false,
+            publishers: [
+              [configName: 'ftpserver', transfers: [
+                [asciiMode: false,
+                cleanRemote: false,
+                excludes: '',
+                flatten: false,
+                makeEmptyDirs: false, 
+                noDefaultExcludes: false, 
+                patternSeparator: '[, ]+', 
+                remoteDirectory: '/', 
+                remoteDirectorySDF: false, 
+                removePrefix: 'build', 
+                sourceFiles: 'build/**']],
+                usePromotionTimestamp: false,
+                useWorkspaceInPromotion: false,
+                verbose: false]
+                ]
       }
     }
   }
