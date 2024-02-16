@@ -46,9 +46,9 @@ pipeline {
                         ]
                     ]
                 ],
-                usePromotionTimestamp: false,
-                useWorkspaceInPromotion: false,
-                verbose: false
+                masterNodeName: false,
+                continueOnError: false,
+                publishers: false
         )
     }
 }
