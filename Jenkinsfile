@@ -24,7 +24,7 @@ pipeline {
 
     stage('FTP Upload') {
       steps {
-            ftpPublisher alwaysPublishFromMaster: false
+            ftpPublisher alwaysPublishFromMaster: false,
             continueOnError: false,
             failOnError: false,
             publishers: [
@@ -43,7 +43,7 @@ pipeline {
                 usePromotionTimestamp: false,
                 useWorkspaceInPromotion: false,
                 verbose: false]
-                ]
+              ]
       }
     }
   }
