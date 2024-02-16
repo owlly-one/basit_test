@@ -47,7 +47,6 @@ pipeline {
                     ]
                 ],
                 masterNodeName: false,
-                publishers: false
         )
     }
 }
