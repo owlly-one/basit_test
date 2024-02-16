@@ -23,28 +23,38 @@ pipeline {
     }
 
     stage('FTP Upload') {
-      steps {
-            ftpPublisher alwaysPublishFromMaster: false,
+    steps {
+        ftpPublisher(
+            alwaysPublishFromMaster: false,
             continueOnError: false,
             failOnError: false,
             publishers: [
-              [configName: 'ftpserver', transfers: [
-                [asciiMode: false,
-                cleanRemote: false,
-                excludes: '',
-                flatten: false,
-                makeEmptyDirs: false, 
-                noDefaultExcludes: false, 
-                patternSeparator: '[, ]+', 
-                remoteDirectory: '/', 
-                remoteDirectorySDF: false, 
-                removePrefix: 'build', 
-                sourceFiles: 'build/**']],
+                [
+                    configName: 'ftpserver', 
+                    transfers: [
+                        [
+                            asciiMode: false,
+                            cleanRemote: false,
+                            excludes: '',
+                            flatten: false,
+                            makeEmptyDirs: false, 
+                            noDefaultExcludes: false, 
+                            patternSeparator: '[, ]+', 
+                            remoteDirectory: '/', 
+                            remoteDirectorySDF: false, 
+                            removePrefix: 'build', 
+                            sourceFiles: 'build/**'
+                        ]
+                    ]
+                ],
                 usePromotionTimestamp: false,
                 useWorkspaceInPromotion: false,
-                verbose: false]
-              ]
-      }
+                verbose: false
+            ]
+        )
+    }
+}
+
     }
   }
-}
+
