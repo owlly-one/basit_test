@@ -24,10 +24,12 @@ pipeline {
 
     stage('FTP Upload') {
     steps {
+    script{
         ftpPublisher(
             alwaysPublishFromMaster: false,
-            continueOnError: false,
-            failOnError: false,
+            continueOnError: true,
+            failOnError: true,
+            masterNodeName: '',
             publishers: [
                     configName: 'ftpserver', 
                     transfers: [
@@ -46,11 +48,10 @@ pipeline {
                         ]
                     ]
                 ],
-                masterNodeName: '',
         )
     }
+    }
 }
-
     }
   }
 
