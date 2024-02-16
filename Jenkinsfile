@@ -29,7 +29,6 @@ pipeline {
             continueOnError: false,
             failOnError: false,
             publishers: [
-                [
                     configName: 'ftpserver', 
                     transfers: [
                         [
@@ -50,7 +49,6 @@ pipeline {
                 usePromotionTimestamp: false,
                 useWorkspaceInPromotion: false,
                 verbose: false
-            ]
         )
     }
 }
